@@ -1,0 +1,42 @@
+*,
+::after,
+::before {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    scroll-behavior: smooth;
+    list-style-type: none;
+}
+
+:root{
+   
+
+}
+/* navbar  */
+
+nav, ul, nav ul div{
+    display: flex;
+}
+
+.connect{
+    padding: 10px 20px;
+}
+.explore li, .deconnect{
+    padding: 10px 20px;
+}
+
+
+h1{
+    padding: 20px;
+}
+
+h2{
+    text-transform: uppercase;
+    padding: 20px;
+}
+p, img{
+    
+    padding: 10px 20px;
+}
+
