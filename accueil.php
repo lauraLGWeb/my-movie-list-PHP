@@ -1,5 +1,5 @@
 <?php
-
+session_start();  
 //get the data infomation
 $serveurName ='localhost';
 $id = "root";
@@ -13,7 +13,11 @@ $conn= new PDO("mysql:host=$serveurName;dbname=tp_netflixx_LEGALL_LAURA", $id,$p
 $getMovies = $conn->prepare("SELECT * FROM (SELECT * FROM movies ORDER BY id DESC LIMIT 5) x ORDER BY id ASC");
 $getMovies->execute();
 $result=$getMovies->fetchAll();
-
+if (isset($_SESSION["connecte"]) && $_SESSION["connecte"]){
+    echo "vous etes connectée";
+} else {
+    echo "vous etes pas  connectée";
+}
 ?>
 
 
@@ -45,7 +49,10 @@ $result=$getMovies->fetchAll();
             </div>
 
              <div class="deconnect">  
-                 <li> <a href="#"> Me déconnecter </a></li>
+                 <?php if((isset($_SESSION["connecte"]) && $_SESSION["connecte"] === true)){
+                    echo "<li> <a href='http://localhost:8888/dw6/PHP/TP-PHP-LAURA/deconnexion.php'>  Me déconnecter </a></li>";
+                }
+                 ?>
             </div>
            
         </ul>
@@ -70,3 +77,5 @@ $result=$getMovies->fetchAll();
     
 </body>
 </html>
+
+
