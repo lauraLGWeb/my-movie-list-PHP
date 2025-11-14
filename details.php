@@ -1,26 +1,3 @@
-<?php
-session_start(); 
-//get the data infomation
-$serveurName ='localhost';
-$id = "root";
-$password="root";
-try {
-$conn= new PDO("mysql:host=$serveurName;dbname=tp_netflixx_LEGALL_LAURA", $id,$password);
-} catch (PDOExeption $e){
-    echo "erreur" .$e->getMessage();
-}
-
-$getMovies = $conn->prepare("SELECT * FROM movies");
-$getMovies->execute();
-$result=$getMovies->fetchAll();
-
-if (isset($_SESSION["connecte"]) && $_SESSION["connecte"]){
-    echo "vous etes connectée";
-} else {
-    echo "vous etes pas  connectée";
-}
-
-?>
 
 
 <!DOCTYPE html>
@@ -28,11 +5,13 @@ if (isset($_SESSION["connecte"]) && $_SESSION["connecte"]){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+     <title>Page d'inscription - Gestion des clients</title>
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+     <link rel="stylesheet" href="style.css"/>
 </head>
-<body>
-    <header>
+<body><header>
     <nav>
         <div>
             <img src="assets/main.png" alt="" width=150px>
@@ -50,7 +29,7 @@ if (isset($_SESSION["connecte"]) && $_SESSION["connecte"]){
                 <li><a href="connection.php"> Connection</a></li>
             </div>
 
-               <div class="deconnect">  
+              <div class="deconnect">  
                  <?php if((isset($_SESSION["connecte"]) && $_SESSION["connecte"] === true)){
                     echo "<li> <a href='http://localhost:8888/dw6/PHP/TP-PHP-LAURA/deconnexion.php'>  Me déconnecter </a></li>";
                 }
@@ -60,21 +39,8 @@ if (isset($_SESSION["connecte"]) && $_SESSION["connecte"]){
         </ul>
     </nav>
 </header>
-
-<main>
-    <!-- foreach lign of data, get the picture title and trailer-->
-    <?php foreach($result as $movie): ?>
-        <h2><?php echo $movie['title']; ?></h2>
-        <p><?php echo $movie['description']; ?></p>
-        <img src="assets/<?php echo $movie['urlphoto']; ?>" alt="" height="300">
-        <a href="details.php"> Consulter ce film</a>
-    <?php endforeach; ?>
-</main>
-
-
-
-
-
-    
+   <section>
+     
+        </section>
 </body>
 </html>

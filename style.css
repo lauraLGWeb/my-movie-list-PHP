@@ -40,3 +40,19 @@ p, img{
     padding: 10px 20px;
 }
 
+.connexionMsg{
+    color: black;
+    display: flex;
+    font-size: 1rem;
+}
+
+
+/* add movie form  */
+.addMovie{
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 20px;
+}
+
+

@@ -1,12 +1,68 @@
 
 <?php
 session_start();  
-if (isset($_SESSION["connecte"]) && $_SESSION["connecte"]){
-    echo "vous etes connectée";
-} else {
-    echo "vous etes pas  connectée";
+
+//get the data infomation
+$serveurName ='localhost';
+$id = "root";
+$password="root";
+try {
+$conn= new PDO("mysql:host=$serveurName;dbname=tp_netflixx_LEGALL_LAURA", $id,$password);
+} catch (PDOExeption $e){
+    echo "erreur" .$e->getMessage();
 }
+
+
+//is someone connected ? 
+if (!isset($_SESSION["connecte"]) || $_SESSION["connecte"] === false) {
+    header("Location:accueil.php");exit;
+} else {
+    echo "vous etes connectée";
+}
+
+
+
+//add the movie to the database
+
+if ((isset($_POST["submit"]) && !empty($_POST["picture"]) ||!empty($_POST["title"])) ||!empty($_POST["description"]) ||!empty($_POST["urlVideo"])) {
+    $title = htmlspecialchars($_POST["title"]);
+    $description = htmlspecialchars($_POST["description"]);
+    $video = htmlspecialchars($_POST["urlVideo"]);
+    $picture = $_FILES["picture"]["name"];
+      
+
+
+    // send everything into the movies table
+    if($title && $description && $video && $picture){
+        $newMovie = $conn->prepare("INSERT INTO movies (title, description, urlphoto, urlvideo) VALUES (:value1, :value2, :value3, :value4)");
+        $newMovie->bindValue(":value1",$title);
+        $newMovie->bindValue(":value2",$description);
+        $newMovie->bindValue(":value3",$picture);
+        $newMovie->bindValue(":value4",$video);
+        $newMovie->execute();  
+        // header("Location:connection.php");exit;
+    
+    }  else {
+        header("Location:admin.php");exit;
+    }
+}
+
+//getting the picture and sending to data and dowloading it to reuse in movies list
+if(isset($_FILES["picture"]) AND $_FILES["picture"]["error"] == 0){
+    $dossierTempo = $_FILES["picture"]["tmp_name"];
+    $dossierSite = __DIR__."/assets/" . $picture;
+    $deplacer = move_uploaded_file($dossierTempo, $dossierSite);
+        if($deplacer){
+            echo 'votre film est bien ajouté';
+        } else {
+            echo "pas envoyé";
+        }
+} else {
+    echo "erreur";
+}
+
 ?>
+
 
 
 <!DOCTYPE html>
@@ -20,7 +76,8 @@ if (isset($_SESSION["connecte"]) && $_SESSION["connecte"]){
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
      <link rel="stylesheet" href="style.css"/>
 </head>
-<body><header>
+<body>
+    <header>
     <nav>
         <div>
             <img src="assets/main.png" alt="" width=150px>
@@ -44,15 +101,21 @@ if (isset($_SESSION["connecte"]) && $_SESSION["connecte"]){
                 }
                  ?>
             </div>
-           
         </ul>
     </nav>
 </header>
-   <section>
-        <div>
-           
-        </form>
-       
-        </section>
+ <section>
+    <form action="" method="POST" class="addMovie" enctype="multipart/form-data">
+        <input type="text" name="title" id="title" placeholder="Titre de ton film">
+
+        <textarea name="description" id="description" placeholder="Sa description"></textarea>
+        
+        <label for="picture">Choisis la photo qui représente ton film :</label>
+        <input type="file" id="picture" name="picture" accept="image/*">
+        
+        <input type="text" name="urlVideo" id="urlVideo" placeholder="Url de ton film">
+        <input type="submit" value="Ajouter le film">
+    </form>
+</section>
 </body>
 </html>

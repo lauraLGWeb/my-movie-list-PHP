@@ -70,7 +70,7 @@ if (isset($_SESSION["connecte"]) && $_SESSION["connecte"]){
 <?php foreach($result as $movie): ?>
     <h2><?php echo $movie['title']; ?></h2>
     <p><?php echo $movie['description']; ?></p>
-    <img src="assets/<?php echo $movie['urlphoto']; ?>" alt="">
+    <img src="assets/<?php echo $movie['urlphoto']; ?>" alt="" height="300">
 <?php endforeach; ?>
 
 </main>
