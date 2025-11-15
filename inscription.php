@@ -1,16 +1,7 @@
 
 <?php
 session_start();  
-$serveurName ='localhost';
-$id = "root";
-$password="root";
-
-try {
-$conn= new PDO("mysql:host=$serveurName;dbname=tp_netflixx_LEGALL_LAURA", $id,$password);
-} catch (PDOException $e){
-    echo "erreur" .$e->getMessage();
-}
-    
+require "./require/dataConnexion.php"; 
 
 if ((isset($_POST["submit"]) && (!empty($_POST["user"])) || !empty($_POST["password"]))) {
     $user = htmlspecialchars($_POST["user"]);
@@ -24,7 +15,7 @@ if ((isset($_POST["submit"]) && (!empty($_POST["user"])) || !empty($_POST["passw
     }   
 }
 ?>
-
+<?php require "./require/connected.php"; ?>
 
 
 
@@ -37,34 +28,7 @@ if ((isset($_POST["submit"]) && (!empty($_POST["user"])) || !empty($_POST["passw
     <title>Document</title>
 </head>
 <body>
-    <header>
-    <nav>
-        <div>
-            <img src="assets/main.png" alt="" width=150px>
-        </div>
-        
-        <ul>
-            <div class="explore">  
-                <li> <a href="accueil.php"> Accueil</a></li>
-                <li> <a href="moviesList.php"> Tous nos films</a></li>
-                <li> <a href="admin.php"> Espace Admin</a></li>
-               
-            </div>
-            <div class="connect">
-                <li><a href="inscription.php"> Inscription / </a></li>
-                <li><a href="connection.php"> Connection</a></li>
-            </div>
-
-                <div class="deconnect">  
-                 <?php if((isset($_SESSION["connecte"]) && $_SESSION["connecte"] === true)){
-                    echo "<li> <a href='http://localhost:8888/dw6/PHP/TP-PHP-LAURA/deconnexion.php'>  Me déconnecter </a></li>";
-                }
-                 ?>
-            </div>
-           
-        </ul>
-    </nav>
-</header>
+    <?php require "./require/menu.php"; ?>
 <section>
         <div>
             <h1>Formulaire D'inscription</h1>
@@ -79,7 +43,7 @@ if ((isset($_POST["submit"]) && (!empty($_POST["user"])) || !empty($_POST["passw
            
             <br>
 
-            <input type="submit" name="submit" id="submit" value="Créer mon compte">
+            <input type="submit" name="submit" id="submit" value="Créer mon compte" class="submitMovie">
 
         </form>
        

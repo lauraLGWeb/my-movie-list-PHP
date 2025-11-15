@@ -3,21 +3,13 @@
 session_start();  
 
 //get the data infomation
-$serveurName ='localhost';
-$id = "root";
-$password="root";
-try {
-$conn= new PDO("mysql:host=$serveurName;dbname=tp_netflixx_LEGALL_LAURA", $id,$password);
-} catch (PDOExeption $e){
-    echo "erreur" .$e->getMessage();
-}
+require "./require/dataConnexion.php"; 
 
-
-//is someone connected ? 
-if (!isset($_SESSION["connecte"]) || $_SESSION["connecte"] === false) {
-    header("Location:accueil.php");exit;
+if (isset($_SESSION["connecte"]) && $_SESSION["connecte"]) {
+    echo '<p class="connexionMsgYes">Vous êtes connectée</p>';
 } else {
-    echo "vous etes connectée";
+    header("Location:connection.php");
+    echo '<p class="connexionMsgNo">Vous n\'êtes pas connectée</p>';
 }
 
 
@@ -57,9 +49,7 @@ if(isset($_FILES["picture"]) AND $_FILES["picture"]["error"] == 0){
         } else {
             echo "pas envoyé";
         }
-} else {
-    echo "erreur";
-}
+} else
 
 ?>
 
@@ -105,16 +95,21 @@ if(isset($_FILES["picture"]) AND $_FILES["picture"]["error"] == 0){
     </nav>
 </header>
  <section>
+
+    <h1> Ajoute ton film ici :</h1>
     <form action="" method="POST" class="addMovie" enctype="multipart/form-data">
         <input type="text" name="title" id="title" placeholder="Titre de ton film">
 
         <textarea name="description" id="description" placeholder="Sa description"></textarea>
         
-        <label for="picture">Choisis la photo qui représente ton film :</label>
-        <input type="file" id="picture" name="picture" accept="image/*">
+        <div>
+            <label for="picture">Choisis la photo qui représente ton film :</label>
+            <input type="file" id="picture" name="picture" accept="image/*">
+        </div>
+        
         
         <input type="text" name="urlVideo" id="urlVideo" placeholder="Url de ton film">
-        <input type="submit" value="Ajouter le film">
+        <input type="submit" value="Ajouter le film" class="submitMovie">
     </form>
 </section>
 </body>
