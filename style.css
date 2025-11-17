@@ -11,7 +11,7 @@
 
 :root{
  
---color1: #03000a;  /* Titres, boutons principaux, accents magiques */
+--color1: #704fbe;  /* Titres, boutons principaux, accents magiques */
  --color2: #FFD93D;  /* Boutons secondaires, survol, éléments lumineux */
  --color3: #FF8CC6;  /* Arrière-plans, hover sur boutons, cartes */
  --color4: #4DA6FF;  /* Fond clair, bannières, sections importantes */
@@ -32,29 +32,37 @@ body{
 
 /* navbar  */
 
+ul{
+display: flex;
+align-items: center;
+
+}
 
 nav{
    background: linear-gradient(90deg, var(--color1), var(--color3));
     height: 10lvh;
     display: flex;
     align-items: center;
-    
 }
- nav li a {
-    background-color: var(--color4);
-    padding: 7px;
+
+ nav li {
+    height: auto;
+    width: auto;
+    margin:3PX;
+    padding: 3px;
     border-radius: 20px;
-    color: var(--color6);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-
  }
+nav li a {
+    color: var(--color6);
+}
 
- nav li a:hover{
+ nav li:hover{
     background-color: var(--color2);
     transition: 0.6s;
-    color: var(--color4);
-   
+ }
 
+nav li a:hover{
+    color: var(--color4);
  }
 
 nav img{
@@ -65,8 +73,8 @@ nav img{
     
 }
 
-.connexionMsgYes{
-    width: 15vw;
+.connexionMsgYes {
+    width: 10vw;
     font-size: 0.8rem;
     border-radius: 10px;
     padding: 8px;
@@ -81,7 +89,7 @@ nav img{
 
 
 .connexionMsgNo{
-    width: 15vw;
+    width: 10vw;
     font-size: 0.8rem;
     border-radius: 10px;
     padding: 8px;
@@ -94,14 +102,14 @@ nav img{
     font-weight: 700;
 }
 
-nav, ul, nav ul div{
+.explore{
     display: flex;
 }
 
 .connect{
     padding: 10px 20px;
 }
-.explore li, .deconnect{
+.deconnect{
     padding: 10px 20px;
 }
 
@@ -113,7 +121,6 @@ nav, ul, nav ul div{
 h1{
     padding: 20px;
     color: var(--color1);
-    font: var(--font1);
     font-family: var(--font1);
     font-size: 3rem;
     text-align: center;
@@ -171,28 +178,50 @@ p {
 }
 
 .movie-img{
-    height: 45vh;
+   
+    width:90%;
     border-radius: 15px;
 }
+
 
 
 /*movie list*/
 .moviepic{
-    height: 30vh;
+    width: 90%;
+    height: auto;
     border-radius: 15px;
     margin: 10px;
-    
 }
 
-.presentation{
-    background-color: #4DD6B0;
 
+iframe {
+    width: 90vw;
+    height: 50vh;
+    border-radius: 20px;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid #4DD6B0;
+}
+
+
+.presentation{
+    display: flex;
+    align-items: center;
+}
+
+
+
+.imageDetail img{
+    height: 20vh;
+    border-radius: 20px;
+    margin: 20px;
+    
 }
 
 .mainList{
     display: flex;
     flex-wrap: wrap;
-    width: 100%;
+   
 }
 
 
@@ -206,7 +235,7 @@ p {
    padding: 10px;
    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
    border-radius: 20px;
-   margin: 5vh 2vh;
+   margin: 5vh 1vh;
    background-color: var(--color6); /* Fond crème */
    border: 2px solid var(--color2); /* Doré */
  
@@ -308,3 +337,43 @@ input[type="submit"]{
     font-family: var(--font2);
     font-weight: 300;
 }
+
+.password{
+
+   position: relative;
+}
+
+.eye{
+    width: 30px;
+    position: absolute;
+    right: 20px;
+    top:9px;
+}
+
+.eye:hover{
+   transform: scale(1.2);
+   transition: 0.5s;
+}
+
+
+ #password{
+    width: 100%;
+    position: absolute;
+ }
+
+h3{
+background-color:rgb(225, 87, 87);
+height: auto;
+width: auto;
+position: absolute;
+padding: 20px;
+border-radius: 20px;
+top: 70vh;
+left: 35vw;
+right: 35vw;
+text-align: center;
+color: var(--color6);
+
+}
+
+

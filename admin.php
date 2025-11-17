@@ -41,9 +41,9 @@ if ((isset($_POST["submit"]) && !empty($_POST["picture"]) ||!empty($_POST["title
 
 //getting the picture and sending to data and dowloading it to reuse in movies list
 if(isset($_FILES["picture"]) AND $_FILES["picture"]["error"] == 0){
-    $dossierTempo = $_FILES["picture"]["tmp_name"];
-    $dossierSite = __DIR__."/assets/" . $picture;
-    $deplacer = move_uploaded_file($dossierTempo, $dossierSite);
+    $dossierTelecharge = $_FILES["picture"]["tmp_name"];
+    $dossierSauvergarde = $_FILES["picture"]["name"];
+    $deplacer = move_uploaded_file($dossierTelecharge, "assets/" . $dossierSauvergarde);
         if($deplacer){
             echo 'votre film est bien ajouté';
         } else {
@@ -67,33 +67,7 @@ if(isset($_FILES["picture"]) AND $_FILES["picture"]["error"] == 0){
      <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-    <header>
-    <nav>
-        <div>
-            <img src="assets/main.png" alt="" width=150px>
-        </div>
-        
-        <ul>
-            <div class="explore">  
-                <li> <a href="accueil.php"> Accueil</a></li>
-                <li> <a href="moviesList.php"> Tous nos films</a></li>
-                <li> <a href="admin.php"> Espace Admin</a></li>
-               
-            </div>
-            <div class="connect">
-                <li><a href="inscription.php"> Inscription / </a></li>
-                <li><a href="connection.php"> Connection</a></li>
-            </div>
-
-              <div class="deconnect">  
-                 <?php if((isset($_SESSION["connecte"]) && $_SESSION["connecte"] === true)){
-                    echo "<li> <a href='http://localhost:8888/dw6/PHP/TP-PHP-LAURA/deconnexion.php'>  Me déconnecter </a></li>";
-                }
-                 ?>
-            </div>
-        </ul>
-    </nav>
-</header>
+     <?php require "./require/menu.php"; ?>
  <section>
 
     <h1> Ajoute ton film ici :</h1>

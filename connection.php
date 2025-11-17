@@ -2,35 +2,37 @@
 session_start();  
 
 require "./require/dataConnexion.php";  
+require "./require/connected.php";
 
+
+// get the psw and id to connect
 if (isset($_POST["submit"])){
     if(!empty($_POST["user"]) && !empty($_POST["password"]) ){
         //get the writing items
         $user = htmlspecialchars($_POST["user"]);
         $password = htmlspecialchars($_POST["password"]);
+        $hash = password_hash($password, PASSWORD_DEFAULT);
        //get the user from data 
         $getUser=$conn->prepare("SELECT * FROM user_name WHERE user=:user");
         $getUser->bindParam(":user", $user);
         $getUser->execute();
         $getResult= $getUser-> fetch();
         // comparing between data and form
-        if($getResult){
-                if($password ===  $getResult["password"]){
+        if($getResult && password_verify($password, $getResult["password"])){
                  $_SESSION["connecte"] = true; 
                 header("Location:admin.php");
                 } else {
                 $_SESSION["connecte"] = false;
-                echo "mauvais mot de passe";
+                echo " <h3> Login ou mot de passe incorrect</h3>";
                 }
-            } else {
-                echo "<h3> Login ou mot de passe incorrect <h3>";
-                $_SESSION["connecte"] = false;
-        }
-    }
+        
+    }else {
+         $_SESSION["connecte"] = false;
+        echo "<h3> Login ou mot de passe incorrect</h3>";
+               
+}
 }
 ?>
-<?php require "./require/connected.php"; ?>
-
 
 
 
@@ -58,17 +60,20 @@ if (isset($_POST["submit"])){
         </div>
         <form action="" method="POST">
            
-            <span class="userInput"><input type="text" name="user" id="user" placeholder="Nom d'utilisateur"></span>
+          <span class="userInput"><input type="text" name="user" id="user" placeholder="Nom d'utilisateur"></span>
             <br>
-
            
-            <input type="password" name="password" id="password" placeholder="Mot de passe">
+            <div class="password">
+                <input type="password" name="password" id="password" placeholder="Mot de passe">
+                <img class="eye" src="assets/oeil.png" alt="oeil visible">
+             </div>
             <br>
 
-            <input type="submit" name="submit" id="submit" value="Se connecter" class="submitMovie">
+            <input type="submit" name="submit" id="submit" value="Créer mon compte" class="submitMovie">
 
         </form>
        
         </section>
+<script src="main.js"></script> 
 </body>
 </html>

@@ -3,16 +3,22 @@
 session_start();  
 require "./require/dataConnexion.php"; 
 
-if ((isset($_POST["submit"]) && (!empty($_POST["user"])) || !empty($_POST["password"]))) {
+if ((isset($_POST["submit"]) && (!empty($_POST["user"])) && !empty($_POST["password"]))) {
+    echo "ok";
     $user = htmlspecialchars($_POST["user"]);
     $password = htmlspecialchars($_POST["password"]);
-    if($user && $password){
+    $hash = password_hash($password, PASSWORD_DEFAULT);
+    if($user && $hash){
         $newUser = $conn->prepare("INSERT INTO user_name (user, password) VALUES (:value1, :value2)");
         $newUser->bindValue(":value1",$user);
-        $newUser->bindValue(":value2",$password);
+        $newUser->bindValue(":value2",$hash);
         $newUser->execute();  
         header("Location:connection.php");exit;
     }   
+} else {
+    echo 
+    "<h3>Merci de remplir identifiant et mot de passe</h3>";
+
 }
 ?>
 <?php require "./require/connected.php"; ?>
@@ -39,8 +45,10 @@ if ((isset($_POST["submit"]) && (!empty($_POST["user"])) || !empty($_POST["passw
             <span class="userInput"><input type="text" name="user" id="user" placeholder="Nom d'utilisateur"></span>
             <br>
            
-            <input type="password" name="password" id="password" placeholder="Mot de passe">
-           
+            <div class="password">
+                <input type="password" name="password" id="password" placeholder="Mot de passe">
+                <img class="eye" src="assets/oeil.png" alt="oeil visible">
+             </div>
             <br>
 
             <input type="submit" name="submit" id="submit" value="Créer mon compte" class="submitMovie">
@@ -54,6 +62,6 @@ if ((isset($_POST["submit"]) && (!empty($_POST["user"])) || !empty($_POST["passw
 
 
 
-    
+   <script src="main.js"></script> 
 </body>
 </html>

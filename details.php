@@ -24,7 +24,7 @@ $result=$getMovie->fetch();
      <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-     <link rel="stylesheet" href="style.css">
+     <link rel="stylesheet" href="style.css?v=2">
 </head>
 <body>
    <?php require "./require/menu.php"; ?>
@@ -37,9 +37,9 @@ $result=$getMovie->fetch();
         <div class="imageDetail">
             <img src="assets/<?php echo $result['urlphoto']; ?>" alt="" height="300">
         </div>
-      </section>   
+      </section >   
 
-        <iframe width="500" height="300" src="<?php echo $result['urlvideo'];?>" title="<?php echo $result['title']; ?> : bande annonce" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <iframe  src="<?php echo $result['urlvideo'];?>" title="<?php echo $result['title']; ?> : bande annonce" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             
     
     </section>
