@@ -7,12 +7,13 @@
         if(hide){
             password.type="text";
             hide=false;
-            console.log("ok");
-            
+            eyeButtun.src="assets/cacher.png"
+                      
         } else {
              password.type="password";
              hide=true;
-             console.log("non");
+             eyeButtun.src="assets/oeil.png"
+    
         }
     
         
