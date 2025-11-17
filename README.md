@@ -48,6 +48,10 @@ If correct → user is redirected to the admin page.
 
 If wrong → message “Incorrect login or password” appears.
 
+Access to the password with the view buttun
+
+Password hashing for security
+
 - Admin Page (only for logged users) -
 
 Allows adding a new movie into the database.
@@ -137,7 +141,6 @@ You will then see the admin link.
 
 -- Possible Improvements --
 
-* Password hashing
 * Dark mode
 * Search bar
 * Pagination
